@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { UserProvider } from '@/contexts/UserContext';
+import { NotificationProvider } from '@/contexts/NotificationContext';
 import { SplashScreen } from '@/app/components/SplashScreen';
 import { LanguageSelection } from '@/app/components/LanguageSelection';
 import { OTPLogin } from '@/app/components/OTPLogin';
+import { VendorRegistration } from '@/app/components/VendorRegistration';
 import { Dashboard } from '@/app/components/Dashboard';
 import { AIDetection } from '@/app/components/AIDetection';
 import { Sales } from '@/app/components/Sales';
@@ -14,22 +17,24 @@ import { Toaster } from '@/app/components/ui/sonner';
 import { Button } from '@/app/components/ui/button';
 import { Monitor, Smartphone } from 'lucide-react';
 
-type Screen = 'splash' | 'language' | 'login' | 'main';
+type Screen = 'splash' | 'language' | 'login' | 'register' | 'main';
 type MobileTab = 'dashboard' | 'detect' | 'sales' | 'connectivity' | 'profile';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('splash');
   const [activeTab, setActiveTab] = useState<MobileTab>('dashboard');
-  const [viewMode, setViewMode] = useState<'mobile' | 'web'>('web');
+  const [viewMode, setViewMode] = useState<'mobile' | 'web'>('mobile');
 
   // Auto-detect screen size for initial view mode
 
   return (
     <LanguageProvider>
-      <div className="w-full min-h-screen bg-gray-50">
-        {/* View Mode Toggle (only show after login) */}
-        {currentScreen === 'main' && (
-<div className="fixed top-4 right-26 md:top-3 md:right-75 z-50 flex gap-2 bg-white/80 backdrop-blur px-3 py-2 rounded-full shadow">
+      <UserProvider>
+        <NotificationProvider>
+          <div className="w-screen min-h-screen bg-gray-50">
+        {/* View Mode Toggle (only show on Dashboard tab) */}
+        {currentScreen === 'main' && activeTab === 'dashboard' && (
+          <div className="fixed top-4 right-26 md:top-3 md:right-75 z-50 flex gap-2 bg-white/80 backdrop-blur px-3 py-2 rounded-full shadow">
             <Button
               size="sm"
               variant={viewMode === 'mobile' ? 'default' : 'outline'}
@@ -63,7 +68,11 @@ export default function App() {
             )}
 
             {currentScreen === 'login' && (
-              <OTPLogin onComplete={() => setCurrentScreen('main')} />
+              <OTPLogin onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} onRegister={() => setCurrentScreen('register')} />
+            )}
+
+            {currentScreen === 'register' && (
+              <VendorRegistration onBack={() => setCurrentScreen('login')} onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} />
             )}
 
             {currentScreen === 'main' && (
@@ -72,7 +81,7 @@ export default function App() {
                 {activeTab === 'detect' && <AIDetection />}
                 {activeTab === 'sales' && <Sales />}
                 {activeTab === 'connectivity' && <SmartConnectivity />}
-                {activeTab === 'profile' && <Profile />}
+                {activeTab === 'profile' && <Profile onLogout={() => setCurrentScreen('login')} />}
                 
                 <MobileNav activeTab={activeTab} onTabChange={setActiveTab} />
               </>
@@ -82,7 +91,7 @@ export default function App() {
 
         {/* Web View */}
         {viewMode === 'web' && currentScreen === 'main' && (
-          <WebDashboard />
+          <WebDashboard onLogout={() => setCurrentScreen('login')} />
         )}
 
         {/* Web View - Before Login */}
@@ -97,13 +106,19 @@ export default function App() {
             )}
 
             {currentScreen === 'login' && (
-              <OTPLogin onComplete={() => setCurrentScreen('main')} />
+              <OTPLogin onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} onRegister={() => setCurrentScreen('register')} />
+            )}
+
+            {currentScreen === 'register' && (
+              <VendorRegistration onBack={() => setCurrentScreen('login')} onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} />
             )}
           </div>
         )}
 
         <Toaster />
-      </div>
+          </div>
+        </NotificationProvider>
+      </UserProvider>
     </LanguageProvider>
   );
 }

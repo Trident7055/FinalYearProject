@@ -1,4 +1,5 @@
 import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { useUser } from '@/contexts/UserContext';
 import { t } from '@/utils/translations';
 import { mockUser } from '@/utils/mockData';
 import { Card } from '@/app/components/ui/card';
@@ -6,8 +7,18 @@ import { Button } from '@/app/components/ui/button';
 import { User, Globe, HelpCircle, LogOut, ChevronRight, Store, Phone, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
 
-export function Profile() {
+interface ProfileProps {
+  onLogout?: () => void;
+}
+
+export function Profile({ onLogout }: ProfileProps) {
   const { language, setLanguage } = useLanguage();
+  const { user, clearUser } = useUser();
+
+  const displayName = user?.ownerName || mockUser.name;
+  const displayPhone = user?.phone || mockUser.phone;
+  const displayShopName = user?.storeName || mockUser.shopName;
+  const displayAddress = user ? `${user.city}, ${user.address}` : mockUser.location;
 
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang);
@@ -28,6 +39,10 @@ export function Profile() {
         ? 'सफलतापूर्वक लॉग आउट हो गए'
         : 'यशस्वीरित्या लॉग आउट झाले'
     );
+    clearUser();
+    setTimeout(() => {
+      onLogout?.();
+    }, 500);
   };
 
   return (
@@ -49,13 +64,13 @@ export function Profile() {
         <Card className="p-6 rounded-2xl shadow-md bg-white">
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 bg-gradient-to-br from-[#4CAF50] to-[#66BB6A] rounded-full flex items-center justify-center text-white text-3xl">
-              {mockUser.name.charAt(0)}
+              {displayName.charAt(0)}
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl">{mockUser.name}</h2>
+              <h2 className="text-2xl">{displayName}</h2>
               <div className="flex items-center gap-2 text-gray-600 mt-1">
                 <Phone className="w-4 h-4" />
-                <p className="text-sm">{mockUser.phone}</p>
+                <p className="text-sm">{displayPhone}</p>
               </div>
             </div>
           </div>
@@ -65,14 +80,14 @@ export function Profile() {
               <Store className="w-5 h-5 text-[#4CAF50]" />
               <div>
                 <p className="text-xs text-gray-500">{language === 'en' ? 'Shop Name' : language === 'hi' ? 'दुकान का नाम' : 'दुकानाचे नाव'}</p>
-                <p className="font-medium">{mockUser.shopName}</p>
+                <p className="font-medium">{displayShopName}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MapPin className="w-5 h-5 text-[#4CAF50]" />
               <div>
                 <p className="text-xs text-gray-500">{language === 'en' ? 'Location' : language === 'hi' ? 'स्थान' : 'स्थान'}</p>
-                <p className="font-medium">{mockUser.location}</p>
+                <p className="font-medium">{displayAddress}</p>
               </div>
             </div>
           </div>

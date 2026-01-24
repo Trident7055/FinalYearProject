@@ -537,8 +537,223 @@ export const translations = {
     en: 'Orange',
     hi: 'संतर���',
     mr: 'संत्रा',
+  },  
+  // Additional strings
+  today: {
+    en: 'today',
+    hi: 'आज',
+    mr: 'आज',
   },
-};
+  good: {
+    en: 'Good',
+    hi: 'अच्छा',
+    mr: 'चांगले',
+  },
+  thisMonth: {
+    en: 'This month',
+    hi: 'इस महीने',
+    mr: 'या महिन्यात',
+  },
+  currentStock: {
+    en: 'Current Stock',
+    hi: 'वर्तमान स्टॉक',
+    mr: 'सध्याचा स्टॉक',
+  },
+  runningStatus: {
+    en: 'Running',
+    hi: 'चल रहा है',
+    mr: 'चालू आहे',
+  },
+  detecting: {
+    en: 'Detecting...',
+    hi: 'पहचान रही है...',
+    mr: 'शोधत आहे...',
+  },
+  ensureGoodLighting: {
+    en: 'Ensure good lighting',
+    hi: 'अच्छी रोशनी सुनिश्चित करें',
+    mr: 'चांगली प्रकाश सुनिश्चित करा',
+  },
+  placeItemOnScale: {
+    en: 'Place item on IoT scale',
+    hi: 'IoT स्केल पर वस्तु रखें',
+    mr: 'IoT स्केलवर वस्तू ठेवा',
+  },
+  keepCameraSteady: {
+    en: 'Keep camera steady',
+    hi: 'कैमरा स्थिर रखें',
+    mr: 'कॅमेरा स्थिर ठेवा',
+  },
+  thisWeek: {
+    en: 'This week',
+    hi: 'इस सप्ताह',
+    mr: 'या आठवड्यात',
+  },
+  transactions: {
+    en: 'Transactions',
+    hi: 'लेनदेन',
+    mr: 'व्यवहार',
+  },
+  recentTransactions: {
+    en: 'Recent Transactions',
+    hi: 'हाल के लेनदेन',
+    mr: 'अलीकडील व्यवहार',
+  },
+  back: {
+    en: 'Back',
+    hi: 'वापस',
+    mr: 'मागे',
+  },
+  found: {
+    en: 'found',
+    hi: 'मिला',
+    mr: 'सापडले',
+  },
+  shopName: {
+    en: 'Shop Name',
+    hi: 'दुकान का नाम',
+    mr: 'दुकानाचे नाव',
+  },
+  location: {
+    en: 'Location',
+    hi: 'स्थान',
+    mr: 'स्थान',
+  },
+  madeWith: {
+    en: 'Made with',
+    hi: 'से बनाया गया',
+    mr: 'सह बनवले',
+  },
+  forVendors: {
+    en: 'for vendors',
+    hi: 'विक्रेताओं के लिए',
+    mr: 'विक्रेत्यांसाठी',
+  },
+  sentTo: {
+    en: 'Sent to',
+    hi: 'भेजा गया',
+    mr: 'पाठवले',
+  },
+  changeNumber: {
+    en: 'Change number',
+    hi: 'नंबर बदलें',
+    mr: 'नंबर बदला',
+  },
+  registerStore: {
+    en: 'Register Store',
+    hi: 'दुकान पंजीकृत करें',
+    mr: 'दुकान नोंदवा',
+  },
+  storeName: {
+    en: 'Store Name',
+    hi: 'दुकान का नाम',
+    mr: 'दुकान चे नाव',
+  },
+  ownerName: {
+    en: 'Owner Name',
+    hi: 'मालिक का नाम',
+    mr: 'मालक चे नाव',
+  },
+  phoneNumber: {
+    en: 'Phone Number',
+    hi: 'फोन नंबर',
+    mr: 'फोन नंबर',
+  },
+  emailAddress: {
+    en: 'Email Address',
+    hi: 'ईमेल पता',
+    mr: 'ईमेल पत्ता',
+  },
+  address: {
+    en: 'Address',
+    hi: 'पता',
+    mr: 'पत्ता',
+  },
+  city: {
+    en: 'City',
+    hi: 'शहर',
+    mr: 'शहर',
+  },
+  pincode: {
+    en: 'Pincode',
+    hi: 'पिन कोड',
+    mr: 'पिन कोड',
+  },
+  pleaseEnterStoreName: {
+    en: 'Please enter store name',
+    hi: 'कृपया दुकान का नाम दर्ज करें',
+    mr: 'कृपया दुकान चे नाव दर्ज करा',
+  },
+  pleaseEnterOwnerName: {
+    en: 'Please enter owner name',
+    hi: 'कृपया मालिक का नाम दर्ज करें',
+    mr: 'कृपया मालक चे नाव दर्ज करा',
+  },
+  pleaseEnterValidPhone: {
+    en: 'Please enter valid phone number',
+    hi: 'कृपया वैध फोन नंबर दर्ज करें',
+    mr: 'कृपया वैध फोन नंबर दर्ज करा',
+  },
+  pleaseEnterValidEmail: {
+    en: 'Please enter valid email',
+    hi: 'कृपया वैध ईमेल दर्ज करें',
+    mr: 'कृपया वैध ईमेल दर्ज करा',
+  },
+  pleaseEnterAddress: {
+    en: 'Please enter address',
+    hi: 'कृपया पता दर्ज करें',
+    mr: 'कृपया पत्ता दर्ज करा',
+  },
+  otpSentSuccessfully: {
+    en: 'OTP sent successfully!',
+    hi: 'OTP सफलतापूर्वक भेजा गया!',
+    mr: 'OTP यशस्वीरित्या पाठवले!',
+  },
+  registrationSuccessful: {
+    en: 'Registration successful!',
+    hi: 'पंजीकरण सफल!',
+    mr: 'नोंदणी यशस्वी!',
+  },
+  pleaseEnterCompleteOTP: {
+    en: 'Please enter complete OTP',
+    hi: 'कृपया पूर्ण OTP दर्ज करें',
+    mr: 'कृपया संपूर्ण OTP प्रविष्ट करा',
+  },
+  verifyAndContinueBtn: {
+    en: 'Verify & Continue',
+    hi: 'सत्यापित करें और जारी रखें',
+    mr: 'सत्यापित करा आणि सुरू ठेवा',
+  },
+  enterOTPSentTo: {
+    en: 'Enter OTP sent to',
+    hi: 'भेजा गया OTP दर्ज करें',
+    mr: 'पाठवलेल OTP दर्ज करा',
+  },
+  completeRegistration: {
+    en: 'Complete Registration',
+    hi: 'पंजीकरण पूरा करें',
+    mr: 'नोंदणी पूर्ण करा',
+  },
+  registerHere: {
+    en: 'Register here',
+    hi: 'यहां पंजीकरण करें',
+    mr: 'येथे नोंदवा',
+  },
+  pleaseEnterValidMobile: {
+    en: 'Please enter a valid mobile number',
+    hi: 'कृपया एक वैध मोबाइल नंबर दर्ज करें',
+    mr: 'कृपया वैध मोबाइल नंबर प्रविष्ट करा',
+  },
+  loginSuccessful: {
+    en: 'Login successful!',
+    hi: 'लॉगिन सफल!',
+    mr: 'लॉगिन यशस्वी!',
+  },
+  phoneNumberFound: {
+    en: 'Phone number found! Enter OTP to login.',
+    hi: 'फोन नंबर मिल गया! लॉगिन करने के लिए OTP दर्ज करें।',
+    mr: 'फोन नंबर सापडला! लॉगिन करण्यासाठी OTP प्रविष्ट करा।',
+  },};
 
 export function t(key: keyof typeof translations, language: Language): string {
   return translations[key][language];

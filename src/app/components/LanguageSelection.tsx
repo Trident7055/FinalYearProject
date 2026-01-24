@@ -19,8 +19,8 @@ export function LanguageSelection({ onComplete }: LanguageSelectionProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#4CAF50] to-[#66BB6A] flex flex-col items-center justify-center p-6">
-      <Card className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#4CAF50] to-[#66BB6A] flex flex-col items-center justify-center px-2 sm:px-4">
+      <Card className="w-full sm:max-w-lg bg-[#4CAF50] rounded-3xl shadow-2xl p-8">
         <div className="text-center space-y-6">
           {/* Icon */}
           <div className="w-20 h-20 mx-auto bg-[#4CAF50] rounded-full flex items-center justify-center">
@@ -28,7 +28,7 @@ export function LanguageSelection({ onComplete }: LanguageSelectionProps) {
           </div>
 
           {/* Title */}
-          <h2 className="text-2xl">
+          <h2 className="text-2xl text-white">
             {t('selectLanguage', language)} / भाषा चुनें / भाषा निवडा
           </h2>
 
@@ -36,7 +36,7 @@ export function LanguageSelection({ onComplete }: LanguageSelectionProps) {
           <div className="space-y-4">
             <Button
               onClick={() => handleLanguageSelect('en')}
-              className="w-full h-16 text-xl bg-white border-2 border-[#4CAF50] text-[#4CAF50] hover:bg-[#4CAF50] hover:text-white rounded-2xl shadow-md transition-all"
+              className="w-full h-16 text-xl bg-white border-2 border-white text-[#4CAF50] hover:bg-[#45a049] hover:text-white rounded-2xl shadow-md transition-all"
               variant="outline"
             >
               <span className="mr-3 text-2xl">🇬🇧</span>
@@ -45,7 +45,7 @@ export function LanguageSelection({ onComplete }: LanguageSelectionProps) {
             
             <Button
               onClick={() => handleLanguageSelect('hi')}
-              className="w-full h-16 text-xl bg-white border-2 border-[#4CAF50] text-[#4CAF50] hover:bg-[#4CAF50] hover:text-white rounded-2xl shadow-md transition-all"
+              className="w-full h-16 text-xl bg-white border-2 border-white text-[#4CAF50] hover:bg-[#45a049] hover:text-white rounded-2xl shadow-md transition-all"
               variant="outline"
             >
               <span className="mr-3 text-2xl">🇮🇳</span>
@@ -54,7 +54,7 @@ export function LanguageSelection({ onComplete }: LanguageSelectionProps) {
             
             <Button
               onClick={() => handleLanguageSelect('mr')}
-              className="w-full h-16 text-xl bg-white border-2 border-[#4CAF50] text-[#4CAF50] hover:bg-[#4CAF50] hover:text-white rounded-2xl shadow-md transition-all"
+              className="w-full h-16 text-xl bg-white border-2 border-white text-[#4CAF50] hover:bg-[#45a049] hover:text-white rounded-2xl shadow-md transition-all"
               variant="outline"
             >
               <span className="mr-3 text-2xl">🇲🇭</span>
