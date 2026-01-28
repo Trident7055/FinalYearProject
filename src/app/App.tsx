@@ -32,90 +32,103 @@ export default function App() {
       <UserProvider>
         <NotificationProvider>
           <div className="w-screen min-h-screen bg-gray-50">
-        {/* View Mode Toggle (only show on Dashboard tab) */}
-        {currentScreen === 'main' && activeTab === 'dashboard' && (
-          <div className="fixed top-4 right-26 md:top-3 md:right-75 z-50 flex gap-2 bg-white/80 backdrop-blur px-3 py-2 rounded-full shadow">
-            <Button
-              size="sm"
-              variant={viewMode === 'mobile' ? 'default' : 'outline'}
-              onClick={() => setViewMode('mobile')}
-              className={`rounded-full ${viewMode === 'mobile' ? 'bg-[#4CAF50]' : ''}`}
-            >
-              <Smartphone className="w-4 h-4 mr-1" />
-              Mobile
-            </Button>
-            <Button
-              size="sm"
-              variant={viewMode === 'web' ? 'default' : 'outline'}
-              onClick={() => setViewMode('web')}
-              className={`rounded-full ${viewMode === 'web' ? 'bg-[#4CAF50]' : ''}`}
-            >
-              <Monitor className="w-4 h-4 mr-1" />
-              Web
-            </Button>
-          </div>
-        )}
-
-        {/* Mobile View */}
-        {viewMode === 'mobile' && (
-          <>
-            {currentScreen === 'splash' && (
-              <SplashScreen onComplete={() => setCurrentScreen('language')} />
+            {/* View Mode Toggle (only show on Dashboard tab) */}
+            {currentScreen === 'main' && activeTab === 'dashboard' && (
+              <div className="fixed top-4 right-26 md:top-3 md:right-75 z-50 flex gap-2 bg-white/80 backdrop-blur px-3 py-2 rounded-full shadow">
+                <Button
+                  size="sm"
+                  variant={viewMode === 'mobile' ? 'default' : 'outline'}
+                  onClick={() => setViewMode('mobile')}
+                  className={`rounded-full ${viewMode === 'mobile' ? 'bg-[#4CAF50]' : ''}`}
+                >
+                  <Smartphone className="w-4 h-4 mr-1" />
+                  Mobile
+                </Button>
+                <Button
+                  size="sm"
+                  variant={viewMode === 'web' ? 'default' : 'outline'}
+                  onClick={() => setViewMode('web')}
+                  className={`rounded-full ${viewMode === 'web' ? 'bg-[#4CAF50]' : ''}`}
+                >
+                  <Monitor className="w-4 h-4 mr-1" />
+                  Web
+                </Button>
+              </div>
             )}
 
-            {currentScreen === 'language' && (
-              <LanguageSelection onComplete={() => setCurrentScreen('login')} />
-            )}
-
-            {currentScreen === 'login' && (
-              <OTPLogin onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} onRegister={() => setCurrentScreen('register')} />
-            )}
-
-            {currentScreen === 'register' && (
-              <VendorRegistration onBack={() => setCurrentScreen('login')} onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} />
-            )}
-
-            {currentScreen === 'main' && (
+            {/* Mobile View */}
+            {viewMode === 'mobile' && (
               <>
-                {activeTab === 'dashboard' && <Dashboard />}
-                {activeTab === 'detect' && <AIDetection />}
-                {activeTab === 'sales' && <Sales />}
-                {activeTab === 'connectivity' && <SmartConnectivity />}
-                {activeTab === 'profile' && <Profile onLogout={() => setCurrentScreen('login')} />}
-                
-                <MobileNav activeTab={activeTab} onTabChange={setActiveTab} />
+                {currentScreen === 'splash' && (
+                  <SplashScreen onComplete={() => setCurrentScreen('language')} />
+                )}
+
+                {currentScreen === 'language' && (
+                  <LanguageSelection onComplete={() => setCurrentScreen('login')} />
+                )}
+
+                {currentScreen === 'login' && (
+                  <OTPLogin onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} onRegister={() => setCurrentScreen('register')} />
+                )}
+
+                {currentScreen === 'register' && (
+                  <VendorRegistration onBack={() => setCurrentScreen('login')} onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} />
+                )}
+
+                {currentScreen === 'main' && (
+                  <>
+                    {activeTab === 'dashboard' && <Dashboard />}
+                    {activeTab === 'detect' && <AIDetection />}
+                    {activeTab === 'sales' && <Sales />}
+                    {activeTab === 'connectivity' && <SmartConnectivity />}
+                    {activeTab === 'profile' && (
+                      <Profile
+                        onLogout={() => {
+                          setCurrentScreen('login');
+                          setViewMode('mobile');
+                          setActiveTab('dashboard');
+                        }}
+                      />
+                    )}
+                    <MobileNav activeTab={activeTab} onTabChange={setActiveTab} />
+                  </>
+                )}
               </>
             )}
-          </>
-        )}
 
-        {/* Web View */}
-        {viewMode === 'web' && currentScreen === 'main' && (
-          <WebDashboard onLogout={() => setCurrentScreen('login')} />
-        )}
-
-        {/* Web View - Before Login */}
-        {viewMode === 'web' && currentScreen !== 'main' && (
-          <div className="flex items-center justify-center min-h-screen">
-            {currentScreen === 'splash' && (
-              <SplashScreen onComplete={() => setCurrentScreen('language')} />
+            {/* Web View */}
+            {viewMode === 'web' && currentScreen === 'main' && (
+              <WebDashboard
+                onLogout={() => {
+                  setCurrentScreen('login');
+                  setViewMode('mobile');
+                  setActiveTab('dashboard');
+                }}
+              />
             )}
 
-            {currentScreen === 'language' && (
-              <LanguageSelection onComplete={() => setCurrentScreen('login')} />
+            {/* Web View - Before Login */}
+            {viewMode === 'web' && currentScreen !== 'main' && (
+              <div className="flex items-center justify-center min-h-screen">
+                {currentScreen === 'splash' && (
+                  <SplashScreen onComplete={() => setCurrentScreen('language')} />
+                )}
+
+                {currentScreen === 'language' && (
+                  <LanguageSelection onComplete={() => setCurrentScreen('login')} />
+                )}
+
+                {currentScreen === 'login' && (
+                  <OTPLogin onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} onRegister={() => setCurrentScreen('register')} />
+                )}
+
+                {currentScreen === 'register' && (
+                  <VendorRegistration onBack={() => setCurrentScreen('login')} onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} />
+                )}
+              </div>
             )}
 
-            {currentScreen === 'login' && (
-              <OTPLogin onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} onRegister={() => setCurrentScreen('register')} />
-            )}
-
-            {currentScreen === 'register' && (
-              <VendorRegistration onBack={() => setCurrentScreen('login')} onComplete={() => { setCurrentScreen('main'); setViewMode('web'); }} />
-            )}
-          </div>
-        )}
-
-        <Toaster />
+            <Toaster />
           </div>
         </NotificationProvider>
       </UserProvider>

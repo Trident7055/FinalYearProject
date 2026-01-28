@@ -23,45 +23,60 @@ export function OTPLogin({ onComplete, onRegister }: OTPLoginProps) {
   const [isRegisteredVendor, setIsRegisteredVendor] = useState(false);
 
   const handleSendOTP = () => {
-    if (phone.trim().length >= 10) {
-      // Check if this phone number is registered
-      const registeredVendors = JSON.parse(localStorage.getItem('registeredVendors') || '{}');
-      const isRegistered = registeredVendors.hasOwnProperty(phone);
-      
-      if (isRegistered) {
-        setIsRegisteredVendor(true);
-        toast.success(t('phoneNumberFound', language));
-      } else {
-        setIsRegisteredVendor(false);
-        toast.success(t('otpSentSuccessfully', language));
-      }
-      
-      setTimeout(() => {
-        setStep('otp');
-      }, 500);
-    } else {
+    if (phone.trim().length !== 10) {
       toast.error(t('pleaseEnterValidMobile', language));
+      return;
     }
+
+    const registeredVendors = JSON.parse(
+      localStorage.getItem('registeredVendors') || '{}'
+    );
+
+    const vendorData = registeredVendors[phone];
+
+    // ❌ NOT REGISTERED → BLOCK LOGIN
+    if (!vendorData) {
+      toast.error('User not registered. Please register first.');
+      return;
+    }
+
+    // ✅ REGISTERED → ALLOW OTP
+    setIsRegisteredVendor(true);
+    toast.success(t('otpSentSuccessfully', language));
+
+    setTimeout(() => {
+      setStep('otp');
+    }, 500);
   };
 
   const handleVerifyOTP = () => {
-    if (otp.length === 6) {
-      // If vendor is registered, load their data
-      if (isRegisteredVendor) {
-        const registeredVendors = JSON.parse(localStorage.getItem('registeredVendors') || '{}');
-        const vendorData = registeredVendors[phone];
-        if (vendorData) {
-          setUser(vendorData);
-        }
-      }
-      
-      toast.success(t('loginSuccessful', language));
-      setTimeout(() => {
-        onComplete();
-      }, 500);
-    } else {
-      toast.error(t('pleaseEnterCompleteOTP', language));
+    if (!isRegisteredVendor) {
+      toast.error('User not registered');
+      return;
     }
+
+    if (otp.length !== 6) {
+      toast.error(t('pleaseEnterCompleteOTP', language));
+      return;
+    }
+
+    const registeredVendors = JSON.parse(
+      localStorage.getItem('registeredVendors') || '{}'
+    );
+
+    const vendorData = registeredVendors[phone];
+
+    if (!vendorData) {
+      toast.error('User data not found');
+      return;
+    }
+
+    setUser(vendorData);
+    toast.success(t('loginSuccessful', language));
+
+    setTimeout(() => {
+      onComplete();
+    }, 500);
   };
 
   return (
@@ -89,7 +104,7 @@ export function OTPLogin({ onComplete, onRegister }: OTPLoginProps) {
                   className="h-14 text-lg rounded-xl border-2 focus:border-white"
                 />
               </div>
-              
+
               <Button
                 onClick={handleSendOTP}
                 className="w-full h-14 text-lg bg-white text-[#4CAF50] hover:bg-gray-100 rounded-xl font-medium"
@@ -132,7 +147,7 @@ export function OTPLogin({ onComplete, onRegister }: OTPLoginProps) {
                   </InputOTP>
                 </div>
               </div>
-              
+
               <Button
                 onClick={handleVerifyOTP}
                 className="w-full h-14 text-lg bg-white text-[#4CAF50] hover:bg-gray-100 rounded-xl font-medium"
